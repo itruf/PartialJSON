@@ -22,6 +22,7 @@ jobs:
         
     - name: Generate Documentation
       run: |
+        rm -rf ./docs
         mkdir -p ./docs
         swift package generate-documentation \
           --target PartialJSON \
