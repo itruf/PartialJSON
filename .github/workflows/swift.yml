@@ -31,7 +31,7 @@ jobs:
     - name: Generate Documentation
       run: |
         # Clean up any existing documentation artifacts
-        rm -rf ./build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
+        rm -rf ./.build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
         mkdir -p ./docs
         swift package generate-documentation \
           --target PartialJSON \
@@ -46,7 +46,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
+        path: ./.build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
         
     - name: Deploy to GitHub Pages
       id: deployment
