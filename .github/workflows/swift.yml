@@ -17,6 +17,24 @@ jobs:
       run: swift build -v
     - name: Run tests
       run: swift test -v
+    - name: Resolve Package Dependencies
+      run: swift package resolve
+        
+    - name: Generate Documentation
+      run: |
+        swift package generate-documentation \
+          --target PartialJSON \
+          --disable-indexing \
+          --transform-for-static-hosting \
+          --hosting-base-path PartialJSON \
+          --output-path ./docs
+      continue-on-error: false
+          
+    - name: Upload Documentation to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
 
   lint:
     name: SwiftLint
@@ -47,26 +65,7 @@ jobs:
       uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: '5.9'
-        
-    - name: Resolve Package Dependencies
-      run: swift package resolve
-        
-    - name: Generate Documentation
-      run: |
-        swift package generate-documentation \
-          --target PartialJSON \
-          --disable-indexing \
-          --transform-for-static-hosting \
-          --hosting-base-path PartialJSON \
-          --output-path ./docs
-      continue-on-error: false
-          
-    - name: Upload Documentation to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
-        
+             
   validate-documentation:
     name: Validate Documentation
     runs-on: macos-latest
