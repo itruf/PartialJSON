@@ -1,5 +1,9 @@
 # PartialJSON
 
+> **Attribution**: This library is developed based on the approach and methodology from [OpenAI's Node.js library](https://github.com/openai/openai-node), which itself vendors the [Promplate partial-json-parser-js](https://github.com/promplate/partial-json-parser-js) library. The test cases and parsing strategies are adapted from both the original Promplate implementation and OpenAI's usage of it, ported to Swift with additional Swift-specific optimizations.
+> 
+> Special thanks to the [Promplate team](https://github.com/promplate/partial-json-parser-js) for creating the original partial JSON parsing solution that inspired this Swift implementation.
+
 A Swift library for parsing incomplete or streaming JSON data. Perfect for handling truncated JSON responses, streaming APIs, or progressive JSON parsing scenarios.
 
 ## Features
