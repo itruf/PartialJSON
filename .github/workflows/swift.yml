@@ -68,7 +68,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Setup Swift
+    - name: Select Xcode 26
+      run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
+        
+    - name: Setup Swift 5.9
       uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: '5.9'
@@ -100,7 +103,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Setup Swift
+    - name: Select Xcode 26
+      run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
+        
+    - name: Setup Swift 5.9
       uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: '5.9'
