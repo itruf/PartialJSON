@@ -25,7 +25,7 @@ Add the following to your `Package.swift` file:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/PartialJSON.git", from: "1.0.0")
+    .package(url: "https://github.com/itruf/PartialJSON.git", from: "0.0.1")
 ]
 ```
 
@@ -43,7 +43,7 @@ targets: [
 ### Xcode Project
 
 1. In Xcode, select File → Add Package Dependencies
-2. Enter the repository URL: `https://github.com/yourusername/PartialJSON.git`
+2. Enter the repository URL: `https://github.com/itruf/PartialJSON.git`
 3. Select your desired version and add to your project
 
 ## Usage

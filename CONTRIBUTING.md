@@ -24,6 +24,8 @@ If you find a bug or have a feature request, please create an issue on GitHub. W
    git clone https://github.com/yourusername/PartialJSON.git
    cd PartialJSON
    ```
+   
+   Replace `yourusername` with your actual GitHub username.
 
 3. **Create a Branch**: Create a new branch for your feature or bug fix:
    ```bash

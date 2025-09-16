@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.1] - 2025-09-16
+
 ### Added
 - Initial release of PartialJSON library
 - Core parsing functionality for incomplete JSON strings
@@ -24,7 +26,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fallback mechanism: tries complete JSON parsing first, then partial
 - Flexible option system with convenient presets
 - Memory-efficient streaming-friendly design
-
-## [1.0.0] - TBD
-
-Initial public release.

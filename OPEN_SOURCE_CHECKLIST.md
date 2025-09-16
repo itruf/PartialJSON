@@ -43,8 +43,8 @@ Before making the repository public:
    - [ ] Update README with license badge
 
 3. **Release**
-   - [ ] Create initial release tag (v1.0.0)
-   - [ ] Write release notes
+   - [x] Create initial release tag (v0.0.1)
+   - [x] Write release notes
    - [ ] Publish to Swift Package Index (optional)
 
 4. **Community**
