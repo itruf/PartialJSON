@@ -436,7 +436,7 @@ private func parsePartialJSON(_ jsonString: String, options: PartialJSONOptions)
         }
         
         if isLastItemOmitted == false, let lastItem = arr.last, 
-           (lastItem is Int || lastItem is Double || lastItem is Float), !options.contains(.number) {
+           lastItem is Int || lastItem is Double || lastItem is Float, !options.contains(.number) {
             // if last item is number - it could be incomplete, check options
             _ = arr.popLast()
         }

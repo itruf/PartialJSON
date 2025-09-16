@@ -20,7 +20,7 @@ jobs:
     - name: Setup Swift
       uses: swift-actions/setup-swift@v1
       with:
-        swift-version: '5.9'
+        swift-version: '5.10'
         
     - name: Show Swift version
       run: swift --version
@@ -71,7 +71,7 @@ jobs:
     - name: Setup Swift
       uses: swift-actions/setup-swift@v1
       with:
-        swift-version: '5.9'
+        swift-version: '5.10'
         
     - name: Generate Documentation
       run: |
@@ -99,7 +99,7 @@ jobs:
     - name: Setup Swift
       uses: swift-actions/setup-swift@v1
       with:
-        swift-version: '5.9'
+        swift-version: '5.10'
         
     - name: Validate Documentation
       run: |
