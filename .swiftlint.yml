@@ -1,0 +1,64 @@
+disabled_rules:
+  - trailing_whitespace
+  - line_length
+  - file_length
+  - type_body_length
+  - function_body_length
+
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - discouraged_object_literal
+  - empty_collection_literal
+  - fallthrough
+  - first_where
+  - last_where
+  - modifier_order
+  - multiline_parameters
+  - operator_usage_whitespace
+  - overridden_super_call
+  - prefer_self_type_over_type_of_self
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - sorted_first_last
+  - trailing_closure
+  - unneeded_parentheses_in_closure_argument
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - yoda_condition
+
+excluded:
+  - .build
+  - .swiftpm
+  - Package.swift
+  - Tests/LinuxMain.swift
+
+identifier_name:
+  min_length: 1
+  max_length: 50
+
+type_name:
+  min_length: 3
+  max_length: 50
+
+custom_rules:
+  no_print:
+    name: "No Print Statements"
+    regex: '\bprint\('
+    message: "Print statements should not be used in production code"
+    severity: warning
+
+  no_force_unwrap:
+    name: "Avoid Force Unwrap"
+    regex: '(?<!\\\\)!'
+    message: "Force unwrapping should be avoided"
+    severity: warning
+    match_kinds:
+      - identifier
+      - keyword
+      - typeidentifier
