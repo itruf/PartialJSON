@@ -22,21 +22,21 @@ jobs:
         
     - name: Generate Documentation
       run: |
-        rm -rf ./docs
+        # Clean up any existing documentation artifacts
+        rm -rf ./build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
         mkdir -p ./docs
         swift package generate-documentation \
           --target PartialJSON \
           --disable-indexing \
           --transform-for-static-hosting \
-          --hosting-base-path PartialJSON \
-          --output-path ./docs
+          --hosting-base-path PartialJSON
       continue-on-error: false
           
     - name: Upload Documentation to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_dir: ./build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
 
   lint:
     name: SwiftLint
