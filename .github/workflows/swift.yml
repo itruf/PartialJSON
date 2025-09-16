@@ -22,6 +22,7 @@ jobs:
         
     - name: Generate Documentation
       run: |
+        mkdir -p ./docs
         swift package generate-documentation \
           --target PartialJSON \
           --disable-indexing \
@@ -49,23 +50,6 @@ jobs:
     - name: Run SwiftLint
       run: swiftlint --strict
 
-  documentation:
-    name: Generate Documentation
-    runs-on: macos-latest
-    if: github.ref == 'refs/heads/main'
-    needs: [build, lint]
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Select Xcode 26
-      run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
-        
-    - name: Setup Swift 5.9
-      uses: SwiftyLab/setup-swift@latest
-      with:
-        swift-version: '5.9'
-             
   validate-documentation:
     name: Validate Documentation
     runs-on: macos-latest
