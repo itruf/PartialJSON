@@ -82,6 +82,4 @@ public struct PartialJSONOptions: OptionSet {
     
     /// All options except numbers (default)
     public static let allExceptNumbers: PartialJSONOptions = [.string, .special, .collections]
-    
 }
-

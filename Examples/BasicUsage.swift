@@ -1,3 +1,4 @@
+// swiftlint:disable no_print
 import Foundation
 
 // MARK: - Basic Examples
@@ -53,7 +54,7 @@ class StreamingJSONParser {
             let result = try parseJSON(buffer, options: options)
             // Try to parse as complete JSON to verify it's actually complete
             if let data = buffer.data(using: .utf8),
-               let _ = try? JSONSerialization.jsonObject(with: data) {
+               (try? JSONSerialization.jsonObject(with: data)) != nil {
                 return (result, true)
             }
             return (result, false)

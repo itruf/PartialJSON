@@ -4,6 +4,7 @@ disabled_rules:
   - file_length
   - type_body_length
   - function_body_length
+  - blanket_disable_command
 
 opt_in_rules:
   - empty_count
@@ -17,6 +18,7 @@ opt_in_rules:
   - empty_collection_literal
   - fallthrough
   - first_where
+  - force_unwrapping
   - last_where
   - modifier_order
   - multiline_parameters
@@ -46,6 +48,10 @@ type_name:
   min_length: 3
   max_length: 50
 
+cyclomatic_complexity:
+  warning: 20
+  error: 25
+
 custom_rules:
   no_print:
     name: "No Print Statements"
@@ -53,12 +59,3 @@ custom_rules:
     message: "Print statements should not be used in production code"
     severity: warning
 
-  no_force_unwrap:
-    name: "Avoid Force Unwrap"
-    regex: '(?<!\\\\)!'
-    message: "Force unwrapping should be avoided"
-    severity: warning
-    match_kinds:
-      - identifier
-      - keyword
-      - typeidentifier

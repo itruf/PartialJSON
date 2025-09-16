@@ -10,7 +10,6 @@ import Foundation
 @testable import PartialJSON
 
 struct PartialJSONTests {
-
     // MARK: - Complete JSON Parsing Tests
     
     @Test func shouldParseCompleteJSON() async throws {
@@ -59,7 +58,7 @@ struct PartialJSONTests {
         
         // Test partial string
         let result2 = try parseJSON("\"")
-        #expect(result2 as? String == "")
+        #expect((result2 as? String)?.isEmpty == true)
         
         // Test partial array
         let result3 = try parseJSON("[2, 3, 4")
