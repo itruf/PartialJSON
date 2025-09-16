@@ -73,6 +73,9 @@ jobs:
       with:
         swift-version: '5.9'
         
+    - name: Resolve Package Dependencies
+      run: swift package resolve
+        
     - name: Generate Documentation
       run: |
         swift package generate-documentation \
@@ -81,6 +84,7 @@ jobs:
           --transform-for-static-hosting \
           --hosting-base-path PartialJSON \
           --output-path ./docs
+      continue-on-error: false
           
     - name: Upload Documentation to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -100,6 +104,9 @@ jobs:
       uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: '5.9'
+        
+    - name: Resolve Package Dependencies
+      run: swift package resolve
         
     - name: Validate Documentation
       run: |
