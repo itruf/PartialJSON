@@ -6,10 +6,18 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
 
     runs-on: macos-latest
+    
+    # Only run documentation deployment on main branch
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
     - uses: actions/checkout@v4
@@ -32,11 +40,17 @@ jobs:
           --hosting-base-path PartialJSON
       continue-on-error: false
           
-    - name: Upload Documentation to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
+        path: ./build/plugins/Swift-DocC/outputs/PartialJSON.doccarchive
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
 
   lint:
     name: SwiftLint
