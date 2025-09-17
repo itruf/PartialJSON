@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2] - 2025-09-17
+
+### Changed
+- **BREAKING**: Renamed main parsing function from `parseJSON()` to `parse()` for cleaner API
+- **BREAKING**: Changed API to use static method `PartialJSON.parse()` instead of global function
+- Updated all documentation and examples to reflect the new API
+- Improved README with better attribution and cleaner examples
+
+### Removed
+- Removed the convenience `parse()` function alias (now the main function)
+- Removed global `parseJSON()` function
+
 ## [0.0.1] - 2025-09-16
 
 ### Added

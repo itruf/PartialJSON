@@ -9,7 +9,7 @@ func basicExamples() {
     // Example 1: Incomplete array
     do {
         let incompleteArray = "[1, 2, 3"
-        let result = try parseJSON(incompleteArray)
+        let result = try parse(incompleteArray)
         print("Incomplete array: \(incompleteArray)")
         print("Parsed result: \(result)\n")
     } catch {
@@ -19,7 +19,7 @@ func basicExamples() {
     // Example 2: Incomplete object
     do {
         let incompleteObject = "{\"name\": \"Alice\", \"age\": 30, \"city\""
-        let result = try parseJSON(incompleteObject)
+        let result = try parse(incompleteObject)
         print("Incomplete object: \(incompleteObject)")
         print("Parsed result: \(result)\n")
     } catch {
@@ -29,7 +29,7 @@ func basicExamples() {
     // Example 3: Nested incomplete structures
     do {
         let nestedJSON = "{\"users\": [{\"id\": 1}, {\"id\": 2"
-        let result = try parseJSON(nestedJSON)
+        let result = try parse(nestedJSON)
         print("Nested incomplete: \(nestedJSON)")
         print("Parsed result: \(result)\n")
     } catch {
@@ -51,7 +51,7 @@ class StreamingJSONParser {
         buffer += chunk
         
         do {
-            let result = try parseJSON(buffer, options: options)
+            let result = try parse(buffer, options: options)
             // Try to parse as complete JSON to verify it's actually complete
             if let data = buffer.data(using: .utf8),
                (try? JSONSerialization.jsonObject(with: data)) != nil {
@@ -104,7 +104,7 @@ func optionsExample() {
     
     // Without number option (default)
     do {
-        let result = try parseJSON(partialNumber, options: .allExceptNumbers)
+        let result = try parse(partialNumber, options: .allExceptNumbers)
         print("Without .number option: \(partialNumber)")
         print("Result: \(result)\n")
     } catch {
@@ -114,7 +114,7 @@ func optionsExample() {
     
     // With number option
     do {
-        let result = try parseJSON(partialNumber, options: .all)
+        let result = try parse(partialNumber, options: .all)
         print("With .number option: \(partialNumber)")
         print("Result: \(result)\n")
     } catch {
@@ -124,7 +124,7 @@ func optionsExample() {
     // Partial boolean
     do {
         let partialBool = "{\"active\": tr"
-        let result = try parseJSON(partialBool, options: .all)
+        let result = try parse(partialBool, options: .all)
         print("Partial boolean: \(partialBool)")
         print("Result: \(result)\n")
     } catch {
@@ -140,7 +140,7 @@ func errorHandlingExample() {
     // Malformed JSON
     do {
         let malformed = "{invalid json}"
-        _ = try parseJSON(malformed)
+        _ = try parse(malformed)
     } catch let error as MalformedJSONError {
         print("Malformed JSON Error:")
         print("  Message: \(error.message)")
@@ -152,7 +152,7 @@ func errorHandlingExample() {
     // Partial not allowed
     do {
         let partial = "\"unclosed string"
-        _ = try parseJSON(partial, options: [])  // No partial types allowed
+        _ = try parse(partial, options: [])  // No partial types allowed
     } catch let error as PartialJSONError {
         print("Partial JSON Error:")
         print("  Message: \(error.message)")

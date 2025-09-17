@@ -24,7 +24,7 @@ import Foundation
 /// ## Example
 /// ```swift
 /// // This throws PartialJSONError because numbers aren't allowed to be partial by default
-/// let result = try parseJSON("[1, 2, 3.", options: .allExceptNumbers)
+/// let result = try parse("[1, 2, 3.", options: .allExceptNumbers)
 /// ```
 public struct PartialJSONError: Error, CustomStringConvertible {
     /// The error message describing what was expected
@@ -55,7 +55,7 @@ public struct PartialJSONError: Error, CustomStringConvertible {
 /// ## Example
 /// ```swift
 /// // This throws MalformedJSONError because of invalid syntax
-/// let result = try parseJSON("{invalid json}")
+/// let result = try parse("{invalid json}")
 /// ```
 public struct MalformedJSONError: Error, CustomStringConvertible {
     /// The error message describing what's wrong with the JSON
@@ -88,15 +88,15 @@ public struct MalformedJSONError: Error, CustomStringConvertible {
 ///
 /// ```swift
 /// // Parse a truncated array
-/// let result = try parseJSON("[1, 2, 3")
+/// let result = try parse("[1, 2, 3")
 /// // Returns: [1, 2, 3]
 ///
 /// // Parse a truncated object
-/// let result = try parseJSON("{\"name\": \"John\", \"age\"")
+/// let result = try parse("{\"name\": \"John\", \"age\"")
 /// // Returns: ["name": "John"]
 ///
 /// // Parse with custom options
-/// let result = try parseJSON("[1, 2, 3.", options: .all)
+/// let result = try parse("[1, 2, 3.", options: .all)
 /// // Returns: [1, 2, 3.0] (allows partial numbers)
 /// ```
 ///
@@ -107,7 +107,7 @@ public struct MalformedJSONError: Error, CustomStringConvertible {
 /// - Throws: 
 ///   - `PartialJSONError` if the JSON is incomplete in a way not allowed by options
 ///   - `MalformedJSONError` if the JSON contains invalid syntax
-public func parseJSON(_ jsonString: String, options: PartialJSONOptions = .allExceptNumbers) throws -> Any {
+public func parse(_ jsonString: String, options: PartialJSONOptions = .allExceptNumbers) throws -> Any {
     guard !jsonString.isEmpty else {
         throw MalformedJSONError("Empty string", at: 0)
     }
@@ -531,25 +531,4 @@ private func parsePartialJSON(_ jsonString: String, options: PartialJSONOptions)
     }
     
     return try parseAny()
-}
-
-/// Convenience function for parsing potentially incomplete JSON.
-///
-/// This is an alias for `parseJSON(_:options:)` with a shorter name.
-///
-/// ## Example
-/// ```swift
-/// let result = try parse("{\"incomplete\": tr")
-/// // Returns: ["incomplete": true]
-/// ```
-///
-/// - Parameters:
-///   - jsonString: The JSON string to parse, which may be incomplete
-///   - options: Controls which types can be partially parsed (default: `.allExceptNumbers`)
-/// - Returns: The parsed JSON as `Any`
-/// - Throws: 
-///   - `PartialJSONError` if the JSON is incomplete in a way not allowed by options
-///   - `MalformedJSONError` if the JSON contains invalid syntax
-public func parse(_ jsonString: String, options: PartialJSONOptions = .allExceptNumbers) throws -> Any {
-    return try parseJSON(jsonString, options: options)
 }

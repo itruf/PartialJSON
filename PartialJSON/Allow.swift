@@ -20,13 +20,13 @@ import Foundation
 ///
 /// If you don't want to allow partial objects:
 /// ```swift
-/// let result = try parseJSON("[{\"a\": 1, \"b\": 2}, {\"a\": 3,", options: .array)
+/// let result = try parse("[{\"a\": 1, \"b\": 2}, {\"a\": 3,", options: .array)
 /// // result: [["a": 1, "b": 2]]
 /// ```
 ///
 /// If you don't want to allow partial strings:
 /// ```swift
-/// let result = try parseJSON("[\"complete string\", \"incompl", options: .all.subtracting(.string))
+/// let result = try parse("[\"complete string\", \"incompl", options: .all.subtracting(.string))
 /// // result: ["complete string"]
 /// ```
 public struct PartialJSONOptions: OptionSet {

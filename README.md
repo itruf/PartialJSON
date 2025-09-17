@@ -1,8 +1,8 @@
 # PartialJSON
 
-> **Attribution**: This library is developed based on the approach and methodology from [OpenAI's Node.js library](https://github.com/openai/openai-node), which itself vendors the [Promplate partial-json-parser-js](https://github.com/promplate/partial-json-parser-js) library. The test cases and parsing strategies are adapted from both the original Promplate implementation and OpenAI's usage of it, ported to Swift with additional Swift-specific optimizations.
+> **Attribution**: This library is developed based on the approach and methodology from [OpenAI's Node.js library](https://github.com/openai/openai-node), which itself vendors the [Promplate partial-json-parser-js](https://github.com/promplate/partial-json-parser-js) library. The test cases and parsing strategies are adapted from both the original @promplate implementation and @OpenAI's usage of it, ported to Swift with additional Swift-specific optimizations.
 > 
-> Special thanks to the [Promplate team](https://github.com/promplate/partial-json-parser-js) for creating the original partial JSON parsing solution that inspired this Swift implementation.
+> Special thanks to the @Promplate team for creating [the original partial JSON parsing solution](https://github.com/promplate/partial-json-parser-js) that inspired this Swift implementation.
 
 A Swift library for parsing incomplete or streaming JSON data. Perfect for handling truncated JSON responses, streaming APIs, or progressive JSON parsing scenarios.
 
@@ -25,7 +25,7 @@ Add the following to your `Package.swift` file:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/itruf/PartialJSON.git", from: "0.0.1")
+    .package(url: "https://github.com/itruf/PartialJSON.git", from: "0.0.2")
 ]
 ```
 
@@ -55,12 +55,12 @@ import PartialJSON
 
 // Parse incomplete JSON with default options
 let incompleteJSON = "[1, 2, 3"
-let result = try parseJSON(incompleteJSON)
+let result = try PartialJSON.parse(incompleteJSON)
 // Result: [1, 2, 3]
 
 // Parse incomplete object
 let partialObject = "{\"name\": \"John\", \"age\""
-let obj = try parseJSON(partialObject)
+let obj = try PartialJSON.parse(partialObject)
 // Result: ["name": "John"]
 ```
 
@@ -70,16 +70,16 @@ Control which types can be parsed when incomplete:
 
 ```swift
 // Allow all types to be partial
-let result = try parseJSON("[1, 2, 3.", options: .all)
+let result = try PartialJSON.parse("[1, 2, 3.", options: .all)
 // Result: [1, 2, 3.0]
 
 // Allow only arrays and objects to be partial
-let result = try parseJSON("[1, 2, 3", options: .collections)
+let result = try PartialJSON.parse("[1, 2, 3", options: .collections)
 // Result: [1, 2, 3]
 
 // Custom options combination
 let customOptions: PartialJSONOptions = [.array, .object, .string]
-let result = try parseJSON("{\"text\": \"incompl", options: customOptions)
+let result = try PartialJSON.parse("{\"text\": \"incompl", options: customOptions)
 // Result: ["text": "incompl"]
 ```
 
@@ -112,7 +112,7 @@ The library provides two types of errors:
 
 ```swift
 do {
-    let result = try parseJSON(jsonString)
+    let result = try PartialJSON.parse(jsonString)
 } catch let error as PartialJSONError {
     // JSON is incomplete in a way not allowed by options
     print("Incomplete JSON: \(error.message) at position \(error.position)")
@@ -135,7 +135,7 @@ class StreamingParser {
         buffer += chunk
         
         do {
-            return try parseJSON(buffer, options: options)
+            return try PartialJSON.parse(buffer, options: options)
         } catch {
             // Not yet complete, wait for more data
             return nil
@@ -154,7 +154,7 @@ func loadProgressively(from chunks: [String]) {
     for chunk in chunks {
         accumulated += chunk
         
-        if let partial = try? parseJSON(accumulated, options: .collections) {
+        if let partial = try? PartialJSON.parse(accumulated, options: .collections) {
             // Update UI with partial results
             updateDisplay(with: partial)
         }
@@ -172,7 +172,7 @@ func handleAPIResponse(_ data: Data) throws -> Any {
     }
     
     // Try to parse even if response was truncated
-    return try parseJSON(jsonString, options: .allExceptNumbers)
+    return try PartialJSON.parse(jsonString, options: .allExceptNumbers)
 }
 ```
 
